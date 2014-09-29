@@ -18,6 +18,7 @@ namespace _1DV402.S2.L1A
             Random rnd = new Random();
             _number = rnd.Next(1, 101);
             _count = 0;
+            _number = 2;
 
         }
         
@@ -31,11 +32,20 @@ namespace _1DV402.S2.L1A
             }
             _count++;
 
+            if (_number == value)
+            {
+                Console.WriteLine("You found the correct number in {0} tries! The answer is : {1}", _count, _number);
+                return true;
+            }
 
+            if (_count == MaxNumberOfGuesses)
+            {
+                Console.WriteLine("Sorry! The correct answer is : {0}", _number);
+                return false;
+            }
 
             if (value < 1 || value > 100)
             {
-                
                 throw new ArgumentOutOfRangeException();
             }
             if (_number < value)
@@ -48,20 +58,13 @@ namespace _1DV402.S2.L1A
                 Console.WriteLine("{0} is too low. {1} guesses left.", value, MaxNumberOfGuesses - _count);
                 return false;
             }
+            if (_count == MaxNumberOfGuesses)
+        
             if (_count > MaxNumberOfGuesses)
             {
                 //too many guesses goddamnit
                 throw new ApplicationException();
             }
-
-            if (_number == value)
-            {
-                Console.WriteLine("You are correct! The answer is : {0}", _number);
-                return true;
-            }
-         
-           
-         
             return true;
         }
         public SecretNumber()
